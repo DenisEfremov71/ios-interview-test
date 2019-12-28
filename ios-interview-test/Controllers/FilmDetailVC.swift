@@ -8,12 +8,14 @@ import UIKit
 class FilmDetailVC : UIViewController {
     
     private let imageView: UIImageView = UIImageView()
-    private let film: Film
+    //private let film: Film
+    
+    let filmDetailPresenter: FilmDetailPresenter
     
     private var venue: Venue? = nil
     
-    init? (film: Film) {
-        self.film = film
+    init? (filmDetailPresenter: FilmDetailPresenter) {
+        self.filmDetailPresenter = filmDetailPresenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -22,7 +24,7 @@ class FilmDetailVC : UIViewController {
     }
     
     override func viewDidLoad() {
-        title = film.name
+        title = filmDetailPresenter.film.name
         self.view.backgroundColor = .white
 
         let displayWidth: CGFloat = view.frame.width
@@ -46,7 +48,7 @@ class FilmDetailVC : UIViewController {
     
     func fetchImage() {
         DispatchQueue.global(qos: .userInitiated).async {
-            let imageUrl = self.film.thumbnailUrl
+            let imageUrl = self.filmDetailPresenter.film.thumbnailUrl
             var imageData: NSData
             do {
                 imageData = try NSData(contentsOf: imageUrl)
@@ -62,7 +64,7 @@ class FilmDetailVC : UIViewController {
     }
     
     func fetchVenue() {
-        Venue.getVenue(uid: film.venueId) { (result) in
+        Venue.getVenue(uid: filmDetailPresenter.film.venueId) { (result) in
             switch result {
             case .success(let venueObject):
                 self.venue = venueObject

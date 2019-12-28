@@ -35,7 +35,7 @@ struct Film {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         let task = session.dataTask(with: request) { (responseData, response, responseError) in
-            DispatchQueue.main.async {
+            //DispatchQueue.main.async {
                 if let error = responseError {
                     completion?(.failure(error))
                 } else if let jsonData = responseData {
@@ -51,7 +51,7 @@ struct Film {
                     let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Data was not retrieved from request"]) as Error
                     completion?(.failure(error))
                 }
-            }
+            //}
         }
         
         task.resume()

@@ -8,11 +8,11 @@ import UIKit
 
 class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    private let cellId = "filmCell"
-    private let tableView: UITableView = UITableView()
+    let cellId = "filmCell"
+    let tableView: UITableView = UITableView()
     private let filmCategory: FilmCategory
     
-    private var films: [Film] = []
+    let filmPresenter = FilmPresenter()
     
     init? (category: FilmCategory) {
         self.filmCategory = category
@@ -33,13 +33,17 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         setupTableView()
         
-        Film.getFilms(category: filmCategory.uid) { (result) in
-            switch result {
-            case .success(let filmObjects):
-                self.films = filmObjects
-                self.tableView.reloadData()
-            case .failure(let error):
-                fatalError("error: \(error.localizedDescription)")
+        filmPresenter.getFilms(category: filmCategory.uid) { (success, error) in
+            if success {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            } else {
+                if let error = error {
+                    fatalError("error: \(error.localizedDescription)")
+                } else {
+                    print("Unknown error getting the films")
+                }
             }
         }
     }
@@ -58,40 +62,5 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
         view.addSubview(tableView)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return films.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! FilmCell
-        
-        let film = films[indexPath.row]
-        cell.update(film: film)
-        cell.textLabel?.text = film.name
-        let imageUrl = film.thumbnailUrl
-        do {
-            let imageData:NSData = try NSData(contentsOf: imageUrl)
-            let image = UIImage(data: imageData as Data)
-            cell.imageView?.image = image
-            cell.imageView?.contentMode = UIViewContentMode.scaleAspectFit
-        } catch {
-            print("Error downloading image")
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let filmDetailVC = FilmDetailVC.init(film: films[indexPath.row]) else {
-            return
-        }
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-        self.navigationController?.pushViewController(filmDetailVC, animated: true)
-    }
 }
 
