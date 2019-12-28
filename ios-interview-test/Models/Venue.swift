@@ -58,7 +58,7 @@ struct Venue {
 
 extension Venue: Decodable {
     enum venueKeys: String, CodingKey {
-        case uid = "venueId"
+        case uid = "uid"
         case name = "name"
         case address = "address"
     }
