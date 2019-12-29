@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+enum FilmDetailPresenterError: Error {
+    case invalidImageData
+    case forwarded(Error)
+}
+
 class FilmDetailPresenter {
     
     let film: Film
@@ -17,25 +22,33 @@ class FilmDetailPresenter {
         self.film = film
     }
     
-    func fetchImage() {
+    func fetchImage(completion: @escaping (UIImage?, FilmDetailPresenterError?) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let imageUrl = self.film.thumbnailUrl
             var imageData: NSData
             do {
                 imageData = try NSData(contentsOf: imageUrl)
-                DispatchQueue.main.async {
-                    let image = UIImage(data: imageData as Data)
-                    self.imageView.image = image
-                    self.imageView.contentMode = UIViewContentMode.scaleAspectFit
+                if let image = UIImage(data: imageData as Data) {
+                    completion(image, nil)
+                } else {
+                    completion(nil, .invalidImageData)
                 }
-            } catch {
+            } catch let error {
                 print("Error downloading image")
+                completion(nil, .forwarded(error))
             }
         }
     }
     
-    func fetchVenue() {
-        
+    func fetchVenue(completion: @escaping (Venue?, Error?) -> Void) {
+        Venue.getVenue(uid: film.venueId) { (result) in
+            switch result {
+            case .success(let venueObject):
+                completion(venueObject, nil)
+            case .failure(let error):
+                completion(nil, error)
+            }
+        }
     }
     
 }

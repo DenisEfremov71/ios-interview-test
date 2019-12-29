@@ -6,13 +6,16 @@
 
 import UIKit
 
-class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, ViewControllerSetup {
 
+    // MARK: - Properties
+    
     let cellId = "filmCell"
     let tableView: UITableView = UITableView()
     private let filmCategory: FilmCategory
-    
     let filmPresenter = FilmPresenter()
+    
+    // MARK: - Initializers
     
     init? (category: FilmCategory) {
         self.filmCategory = category
@@ -23,15 +26,10 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View controller life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = filmCategory.category.rawValue
-        
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        navigationItem.backBarButtonItem = backItem
-        
-        setupTableView()
         
         filmPresenter.getFilms(category: filmCategory.uid) { (success, error) in
             if success {
@@ -48,6 +46,8 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    // MARK: - Methods
+    
     func setupTableView() {
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         let displayWidth: CGFloat = view.frame.width
@@ -60,6 +60,18 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
+    }
+    
+    // MARK: - ViewControllerSetup protocol
+    
+    func setupUI() {
+        title = filmCategory.category.rawValue
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem
+        
+        setupTableView()
     }
     
 }

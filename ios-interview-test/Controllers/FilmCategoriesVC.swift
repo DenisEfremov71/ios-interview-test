@@ -5,22 +5,26 @@
 
 import UIKit
 
-class FilmCategoriesVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol ViewControllerSetup {
+    func setupUI()
+}
+
+class FilmCategoriesVC : UIViewController, UITableViewDelegate, UITableViewDataSource, ViewControllerSetup {
+    
+    // MARK: - Properties
     
     let cellId = "categoryCell"
     let tableView: UITableView = UITableView()
     let categoryPresenter = CategoryPresenter()
     
+    // MARK: - View controller life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Film Categories"
-        
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        navigationItem.backBarButtonItem = backItem
-        
-        setupTableView()
+        setupUI()
     }
+    
+    // MARK: - Methods
     
     func setupTableView() {
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
@@ -34,5 +38,17 @@ class FilmCategoriesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
+    }
+    
+    // MARK: - ViewControllerSetup protocol
+    
+    func setupUI() {
+        title = "Film Categories"
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem
+        
+        setupTableView()
     }
 }

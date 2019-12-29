@@ -5,14 +5,15 @@
 
 import UIKit
 
-class FilmDetailVC : UIViewController {
+class FilmDetailVC : UIViewController, ViewControllerSetup {
     
-    private let imageView: UIImageView = UIImageView()
-    //private let film: Film
+    // MARK: - Properties
     
     let filmDetailPresenter: FilmDetailPresenter
-    
+    private let imageView: UIImageView = UIImageView()
     private var venue: Venue? = nil
+    
+    // MARK: - Initializers
     
     init? (filmDetailPresenter: FilmDetailPresenter) {
         self.filmDetailPresenter = filmDetailPresenter
@@ -23,16 +24,44 @@ class FilmDetailVC : UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View controller life cycle
+    
     override func viewDidLoad() {
+        
+        setupUI()
+        
+        self.filmDetailPresenter.fetchImage { (image, error) in
+            if image != nil {
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            } else {
+                print(error?.localizedDescription ?? "no error")
+            }
+        }
+        
+        self.filmDetailPresenter.fetchVenue { (venue, error) in
+            if venue != nil {
+                self.venue = venue
+            } else {
+                print(error?.localizedDescription ?? "no error")
+            }
+        }
+    }
+    
+    // MARK: - ViewControllerSetup protocol
+    
+    func setupUI() {
+        
         title = filmDetailPresenter.film.name
         self.view.backgroundColor = .white
-
+        
         let displayWidth: CGFloat = view.frame.width
         
         imageView.frame.size = CGSize(width: 200, height: 350)
         imageView.frame.origin = CGPoint(x: displayWidth/2-imageView.frame.size.width/2, y: 50)
+        imageView.contentMode = UIViewContentMode.scaleAspectFit
         view.addSubview(imageView)
-        self.fetchImage()
         
         let venueButton = UIButton()
         venueButton.frame.size = CGSize(width: imageView.frame.size.width, height: 50)
@@ -43,34 +72,6 @@ class FilmDetailVC : UIViewController {
         venueButton.layer.borderWidth = 1
         view.addSubview(venueButton)
         
-        self.fetchVenue()
     }
-    
-    func fetchImage() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let imageUrl = self.filmDetailPresenter.film.thumbnailUrl
-            var imageData: NSData
-            do {
-                imageData = try NSData(contentsOf: imageUrl)
-                DispatchQueue.main.async {
-                    let image = UIImage(data: imageData as Data)
-                    self.imageView.image = image
-                    self.imageView.contentMode = UIViewContentMode.scaleAspectFit
-                }
-            } catch {
-                print("Error downloading image")
-            }
-        }
-    }
-    
-    func fetchVenue() {
-        Venue.getVenue(uid: filmDetailPresenter.film.venueId) { (result) in
-            switch result {
-            case .success(let venueObject):
-                self.venue = venueObject
-            case .failure(let error):
-                fatalError("error: \(error.localizedDescription)")
-            }
-        }
-    }
+
 }
