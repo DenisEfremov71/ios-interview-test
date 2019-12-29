@@ -9,7 +9,7 @@ class FilmDetailVC : UIViewController, ViewControllerSetup {
     
     // MARK: - Properties
     
-    let filmDetailPresenter: FilmDetailPresenter
+    let filmDetailPresenter: FilmDetailPresenter!
     private let imageView: UIImageView = UIImageView()
     private var venue: Venue? = nil
     

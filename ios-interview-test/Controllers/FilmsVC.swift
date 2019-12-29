@@ -13,13 +13,14 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, Vi
     let cellId = "filmCell"
     let tableView: UITableView = UITableView()
     private let filmCategory: FilmCategory
-    let filmPresenter = FilmPresenter()
+    let filmPresenter: FilmPresenter!
     let pendingOperations = PendingOperations()
     
     // MARK: - Initializers
     
-    init? (category: FilmCategory) {
+    init? (category: FilmCategory, presenter: FilmPresenter) {
         self.filmCategory = category
+        self.filmPresenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     

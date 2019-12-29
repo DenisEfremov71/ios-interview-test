@@ -15,7 +15,18 @@ class FilmCategoriesVC : UIViewController, UITableViewDelegate, UITableViewDataS
     
     let cellId = "categoryCell"
     let tableView: UITableView = UITableView()
-    let categoryPresenter = CategoryPresenter()
+    let categoryPresenter: CategoryPresenter!
+    
+    // MARK: - Initializers
+    
+    init(with presenter: CategoryPresenter) {
+        self.categoryPresenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View controller life cycle
     

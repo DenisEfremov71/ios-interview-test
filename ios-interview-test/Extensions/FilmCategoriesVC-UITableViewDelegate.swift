@@ -16,7 +16,7 @@ extension FilmCategoriesVC {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let filmVC = FilmsVC.init(category: categoryPresenter.categories[indexPath.row]) else {
+        guard let filmVC = FilmsVC.init(category: categoryPresenter.categories[indexPath.row], presenter: FilmPresenter()) else {
             return
         }
         
