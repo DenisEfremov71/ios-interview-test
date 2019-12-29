@@ -31,6 +31,8 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, Vi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
+        
         filmPresenter.getFilms(category: filmCategory.uid) { (success, error) in
             if success {
                 DispatchQueue.main.async {
