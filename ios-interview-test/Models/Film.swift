@@ -4,6 +4,14 @@
 //
 
 import Foundation
+import UIKit
+
+// This enum contains all the possible states a film thumbnail image can be in
+enum FilmImageState {
+    case new
+    case downloaded
+    case failed
+}
 
 struct Film {
     static private let movieUrlString: String = "https://assets.eventbase.com/apps/ios-interview-project/resources/movielistjson.json"
@@ -15,6 +23,9 @@ struct Film {
     let thumbnailUrl: URL
     let categoryId: Int
     let venueId: Int
+    
+    var state = FilmImageState.new
+    var image = UIImage(named: "Placeholder")
     
     public enum Result<Value> {
         case success(Value)
