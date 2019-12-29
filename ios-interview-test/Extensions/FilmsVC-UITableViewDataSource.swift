@@ -18,20 +18,71 @@ extension FilmsVC {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! FilmCell
         
+        if cell.accessoryView == nil {
+            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            cell.accessoryView = indicator
+        }
+        let indicator = cell.accessoryView as! UIActivityIndicatorView
+        
         let film = filmPresenter.films[indexPath.row]
         cell.update(film: film)
         cell.textLabel?.text = film.name
-        let imageUrl = film.thumbnailUrl
-        do {
-            let imageData:NSData = try NSData(contentsOf: imageUrl)
-            let image = UIImage(data: imageData as Data)
-            cell.imageView?.image = image
-            cell.imageView?.contentMode = UIViewContentMode.scaleAspectFit
-        } catch {
-            print("Error downloading image")
+        cell.imageView?.image = film.image
+        cell.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        switch (film.state) {
+        
+        case .failed:
+            indicator.stopAnimating()
+            cell.textLabel?.text = "Failed to load"
+        case .new:
+            indicator.startAnimating()
+            if !tableView.isDragging && !tableView.isDecelerating {
+                startOperations(for: film, at: indexPath)
+            }
+        case .downloaded:
+            indicator.stopAnimating()
         }
         
         return cell
+    }
+    
+    // MARK: - operation management
+    
+    func startOperations(for film: Film, at indexPath: IndexPath) {
+        switch (film.state) {
+        case .new:
+            startDownload(for: film, at: indexPath)
+        case .downloaded:
+            NSLog("Film has been downloaded")
+        case .failed:
+            NSLog("Film failed to download")
+        }
+    }
+    
+    func startDownload(for film: Film, at indexPath: IndexPath) {
+        
+        guard pendingOperations.downloadsInProgress[indexPath] == nil else {
+            return
+        }
+        
+        let downloader = ImageDownloader(film)
+        downloader.completionBlock = {
+            if downloader.isCancelled {
+                return
+            }
+            
+            self.filmPresenter.films[indexPath.row].image = downloader.film.image
+            self.filmPresenter.films[indexPath.row].state = FilmImageState.downloaded
+            
+            DispatchQueue.main.async {
+                self.pendingOperations.downloadsInProgress.removeValue(forKey: indexPath)
+                self.tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+        }
+        
+        pendingOperations.downloadsInProgress[indexPath] = downloader
+        pendingOperations.downloadQueue.addOperation(downloader)
     }
     
 }

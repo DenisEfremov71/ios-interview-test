@@ -14,6 +14,7 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, Vi
     let tableView: UITableView = UITableView()
     private let filmCategory: FilmCategory
     let filmPresenter = FilmPresenter()
+    let pendingOperations = PendingOperations()
     
     // MARK: - Initializers
     

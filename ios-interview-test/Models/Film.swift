@@ -90,6 +90,6 @@ extension Film: Decodable {
         let categoryId: Int = try container.decode(Int.self, forKey: .category)
         let venueId: Int = try container.decode(Int.self, forKey: .venue)
         
-        self.init(uid: uid, name: name, shortDesc: shortDesc, duration: duration, thumbnailUrl:thumbnailUrl, categoryId: categoryId, venueId:venueId)
+        self.init(uid: uid, name: name, shortDesc: shortDesc, duration: duration, thumbnailUrl: thumbnailUrl, categoryId: categoryId, venueId: venueId, state: FilmImageState.new, image: UIImage(named: "Placeholder"))
     }
 }
