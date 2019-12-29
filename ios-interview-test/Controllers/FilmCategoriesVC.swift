@@ -16,11 +16,13 @@ class FilmCategoriesVC : UIViewController, UITableViewDelegate, UITableViewDataS
     let cellId = "categoryCell"
     let tableView: UITableView = UITableView()
     let categoryPresenter: CategoryPresenter!
+    var errorPresenter: ErrorPresenter!
     
     // MARK: - Initializers
     
-    init(with presenter: CategoryPresenter) {
+    init(with presenter: CategoryPresenter, errorPresenter: ErrorPresenter) {
         self.categoryPresenter = presenter
+        self.errorPresenter = errorPresenter
         super.init(nibName: nil, bundle: nil)
     }
     

@@ -31,25 +31,23 @@ struct Venue {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         let task = session.dataTask(with: request) { (responseData, response, responseError) in
-            //DispatchQueue.main.async {
-                if let error = responseError {
-                    completion?(.failure(error))
-                } else if let jsonData = responseData {
-                    let decoder = JSONDecoder()
-                    do {
-                        let venues = try decoder.decode([Venue].self, from: jsonData)
-                        guard let venue = venues.first(where: { $0.uid == uid} ) else {
-                            return
-                        }
-                        completion?(.success(venue))
-                    } catch {
-                        completion?(.failure(error))
+            if let error = responseError {
+                completion?(.failure(error))
+            } else if let jsonData = responseData {
+                let decoder = JSONDecoder()
+                do {
+                    let venues = try decoder.decode([Venue].self, from: jsonData)
+                    guard let venue = venues.first(where: { $0.uid == uid} ) else {
+                        return
                     }
-                } else {
-                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Data was not retrieved from request"]) as Error
+                    completion?(.success(venue))
+                } catch {
                     completion?(.failure(error))
                 }
-            //}
+            } else {
+                let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Data was not retrieved from request"]) as Error
+                completion?(.failure(error))
+            }
         }
         
         task.resume()

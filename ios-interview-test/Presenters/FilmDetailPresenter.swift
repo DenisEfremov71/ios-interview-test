@@ -34,7 +34,6 @@ class FilmDetailPresenter {
                     completion(nil, .invalidImageData)
                 }
             } catch let error {
-                print("Error downloading image")
                 completion(nil, .forwarded(error))
             }
         }

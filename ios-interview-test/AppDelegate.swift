@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navController = UINavigationController()
         let presenter = CategoryPresenter()
-        navController.viewControllers = [FilmCategoriesVC(with: presenter)]
+        navController.viewControllers = [FilmCategoriesVC(with: presenter, errorPresenter: ErrorPresenter(message:""))]
         window!.rootViewController = navController
         window!.makeKeyAndVisible()
         

@@ -16,7 +16,7 @@ extension FilmsVC {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let filmDetailVC = FilmDetailVC(filmDetailPresenter: FilmDetailPresenter(film: filmPresenter.films[indexPath.row])) else {
+        guard let filmDetailVC = FilmDetailVC(filmDetailPresenter: FilmDetailPresenter(film: filmPresenter.films[indexPath.row]), errorPresenter: ErrorPresenter(message:"")) else {
             return
         }
         

@@ -13,14 +13,16 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, Vi
     let cellId = "filmCell"
     let tableView: UITableView = UITableView()
     private let filmCategory: FilmCategory
+    var errorPresenter: ErrorPresenter!
     let filmPresenter: FilmPresenter!
     let pendingOperations = PendingOperations()
     
     // MARK: - Initializers
     
-    init? (category: FilmCategory, presenter: FilmPresenter) {
+    init? (category: FilmCategory, presenter: FilmPresenter, errorPresenter: ErrorPresenter) {
         self.filmCategory = category
         self.filmPresenter = presenter
+        self.errorPresenter = errorPresenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,10 +44,11 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, Vi
                 }
             } else {
                 if let error = error {
-                    fatalError("error: \(error.localizedDescription)")
+                    self.errorPresenter.message = error.localizedDescription
                 } else {
-                    print("Unknown error getting the films")
+                    self.errorPresenter.message = "Unknown error getting the films"
                 }
+                self.errorPresenter.present(in: self)
             }
         }
     }

@@ -10,13 +10,15 @@ class FilmDetailVC : UIViewController, ViewControllerSetup {
     // MARK: - Properties
     
     let filmDetailPresenter: FilmDetailPresenter!
+    var errorPresenter: ErrorPresenter!
     private let imageView: UIImageView = UIImageView()
     private var venue: Venue? = nil
     
     // MARK: - Initializers
     
-    init? (filmDetailPresenter: FilmDetailPresenter) {
+    init? (filmDetailPresenter: FilmDetailPresenter, errorPresenter: ErrorPresenter) {
         self.filmDetailPresenter = filmDetailPresenter
+        self.errorPresenter = errorPresenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,7 +38,8 @@ class FilmDetailVC : UIViewController, ViewControllerSetup {
                     self.imageView.image = image
                 }
             } else {
-                print(error?.localizedDescription ?? "no error")
+                self.errorPresenter.message = error?.localizedDescription ?? "no error"
+                self.errorPresenter.present(in: self)
             }
         }
         
@@ -44,7 +47,8 @@ class FilmDetailVC : UIViewController, ViewControllerSetup {
             if venue != nil {
                 self.venue = venue
             } else {
-                print(error?.localizedDescription ?? "no error")
+                self.errorPresenter.message = error?.localizedDescription ?? "no error"
+                self.errorPresenter.present(in: self)
             }
         }
     }
@@ -70,8 +74,16 @@ class FilmDetailVC : UIViewController, ViewControllerSetup {
         venueButton.setTitleColor(.black, for: .normal)
         venueButton.layer.borderColor = UIColor.black.cgColor
         venueButton.layer.borderWidth = 1
+        venueButton.addTarget(self, action: #selector(onVenueButton), for: .touchUpInside)
         view.addSubview(venueButton)
         
+    }
+    
+    // MARK: - Actions
+    
+    @objc func onVenueButton(sender: UIButton!) {
+        errorPresenter.message = "The feature is not implemented yet!"
+        errorPresenter.present(in: self)
     }
 
 }
