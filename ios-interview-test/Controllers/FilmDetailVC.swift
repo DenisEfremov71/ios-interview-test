@@ -29,7 +29,7 @@ class FilmDetailVC : UIViewController, ViewControllerSetup {
     // MARK: - View controller life cycle
     
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
         setupUI()
         
         self.filmDetailPresenter.fetchImage { (image, error) in

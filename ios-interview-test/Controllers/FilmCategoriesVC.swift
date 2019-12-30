@@ -5,16 +5,13 @@
 
 import UIKit
 
-protocol ViewControllerSetup {
-    func setupUI()
-}
-
-class FilmCategoriesVC : UIViewController, UITableViewDelegate, UITableViewDataSource, ViewControllerSetup {
+class FilmCategoriesVC : UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewSetup, ViewControllerSetup {
+    var tableView = UITableView()
+    
     
     // MARK: - Properties
     
-    let cellId = "categoryCell"
-    let tableView: UITableView = UITableView()
+    var cellId = "categoryCell"
     let categoryPresenter: CategoryPresenter!
     var errorPresenter: ErrorPresenter!
     
@@ -35,22 +32,6 @@ class FilmCategoriesVC : UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-    }
-    
-    // MARK: - Methods
-    
-    func setupTableView() {
-        let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
-        let displayWidth: CGFloat = view.frame.width
-        let displayHeight: CGFloat = view.frame.height
-        
-        tableView.frame = CGRect(x: 0, y: 0, width: displayWidth, height: displayHeight - barHeight)
-        tableView.separatorColor = .lightGray
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        view.addSubview(tableView)
     }
     
     // MARK: - ViewControllerSetup protocol

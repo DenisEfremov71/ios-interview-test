@@ -6,12 +6,12 @@
 
 import UIKit
 
-class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, ViewControllerSetup {
+class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewSetup, ViewControllerSetup {
 
     // MARK: - Properties
     
-    let cellId = "filmCell"
-    let tableView: UITableView = UITableView()
+    var cellId = "filmCell"
+    var tableView = UITableView()
     private let filmCategory: FilmCategory
     var errorPresenter: ErrorPresenter!
     let filmPresenter: FilmPresenter!
@@ -51,22 +51,6 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, Vi
                 self.errorPresenter.present(in: self)
             }
         }
-    }
-    
-    // MARK: - Methods
-    
-    func setupTableView() {
-        let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
-        let displayWidth: CGFloat = view.frame.width
-        let displayHeight: CGFloat = view.frame.height
-        
-        tableView.frame = CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight)
-        tableView.separatorColor = .lightGray
-        tableView.register(FilmCell.self, forCellReuseIdentifier: cellId)
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        view.addSubview(tableView)
     }
     
     // MARK: - ViewControllerSetup protocol
