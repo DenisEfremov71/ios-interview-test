@@ -16,12 +16,12 @@ extension FilmCategoriesVC {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let filmVC = FilmsVC.init(category: categoryPresenter.categories[indexPath.row], presenter: FilmPresenter(), errorPresenter: errorPresenter) else {
+        guard let filmsVC = FilmsVC.init(category: categoryPresenter.categories[indexPath.row], presenter: FilmPresenter(), errorPresenter: errorPresenter) else {
             return
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
-        self.navigationController?.pushViewController(filmVC, animated: true)
+        self.navigationController?.pushViewController(filmsVC, animated: true)
     }
     
 }

@@ -1,5 +1,5 @@
 //
-//  FilmVC-UIScrollViewDelegate.swift
+//  FilmsVC-UIScrollViewDelegate.swift
 //  ios-interview-test
 //
 //  Created by Denis Efremov on 2019-12-29.
