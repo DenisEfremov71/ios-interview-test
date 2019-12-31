@@ -82,8 +82,17 @@ class FilmDetailVC : UIViewController, ViewControllerSetup {
     // MARK: - Actions
     
     @objc func onVenueButton(sender: UIButton!) {
-        errorPresenter.message = "The feature is not implemented yet!"
-        errorPresenter.present(in: self)
+        guard self.venue != nil else {
+            errorPresenter.message = "No venue associated with the movie"
+            errorPresenter.present(in: self)
+            return
+        }
+        guard let venueDetailVC = VenueDetailVC(venueDetailPresenter: VenueDetailPresenter(venue: venue!), errorPresenter: errorPresenter) else {
+            errorPresenter.message = "Failed to initialize VenueDetailVC"
+            errorPresenter.present(in: self)
+            return
+        }
+        self.navigationController?.pushViewController(venueDetailVC, animated: true)
     }
 
 }
