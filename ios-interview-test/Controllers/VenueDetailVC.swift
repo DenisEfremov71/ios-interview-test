@@ -12,14 +12,11 @@ class VenueDetailVC: UIViewController, ViewControllerSetup {
     
     // MARK: - Properties
     
-    let venueDetailPresenter: VenueDetailPresenter!
-    var errorPresenter: ErrorPresenter!    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     // MARK: - Initializers
     
-    init? (venueDetailPresenter: VenueDetailPresenter, errorPresenter: ErrorPresenter) {
-        self.venueDetailPresenter = venueDetailPresenter
-        self.errorPresenter = errorPresenter
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,7 +34,7 @@ class VenueDetailVC: UIViewController, ViewControllerSetup {
     // MARK: - ViewControllerSetup protocol
     
     func setupUI() {
-        title = "Venue: \(venueDetailPresenter.venue.name)"
+        title = "Venue: \(appDelegate.venueDetailPresenter.venue!.name)"
         view.backgroundColor = .white
         
         let backItem = UIBarButtonItem()
@@ -47,7 +44,7 @@ class VenueDetailVC: UIViewController, ViewControllerSetup {
         let venueAddress = UILabel(frame: CGRect(x: 20, y: 20, width: 280, height: 100))
         venueAddress.center = CGPoint(x: 160, y: 100)
         venueAddress.textAlignment = .left
-        venueAddress.text = "Address: \(venueDetailPresenter.venue.address)"
+        venueAddress.text = "Address: \(appDelegate.venueDetailPresenter.venue!.address)"
         venueAddress.numberOfLines = 2
         venueAddress.lineBreakMode = .byWordWrapping
         self.view.addSubview(venueAddress)

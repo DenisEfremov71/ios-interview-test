@@ -14,24 +14,31 @@ enum FilmDetailPresenterError: Error {
     case forwarded(Error)
 }
 
-class FilmDetailPresenter {
+class FilmDetailPresenter: ImageCaching {
     
-    let film: Film
+    var film: Film?
+    var filmCache = NSCache<NSString, UIImage>()
     
-    init(film: Film) {
+    init(film: Film? = nil) {
         self.film = film
     }
     
     func fetchImage(completion: @escaping (UIImage?, FilmDetailPresenterError?) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let imageUrl = self.film.thumbnailUrl
+            let imageUrl = self.film!.thumbnailUrl
             var imageData: NSData
             do {
-                imageData = try NSData(contentsOf: imageUrl)
-                if let image = UIImage(data: imageData as Data) {
-                    completion(image, nil)
+                if let cachedImage = self.getFilmImageFromCache(for: self.film!.thumbnailUrl.absoluteString as NSString) {
+                    completion(cachedImage, nil)
                 } else {
-                    completion(nil, .invalidImageData)
+                    imageData = try NSData(contentsOf: imageUrl)
+                    if let image = UIImage(data: imageData as Data) {
+                        self.film!.image = image
+                        self.storeImageInCache(for: self.film!)
+                        completion(image, nil)
+                    } else {
+                        completion(nil, .invalidImageData)
+                    }
                 }
             } catch let error {
                 completion(nil, .forwarded(error))
@@ -40,7 +47,7 @@ class FilmDetailPresenter {
     }
     
     func fetchVenue(completion: @escaping (Venue?, Error?) -> Void) {
-        Venue.getVenue(uid: film.venueId) { (result) in
+        Venue.getVenue(uid: film!.venueId) { (result) in
             switch result {
             case .success(let venueObject):
                 completion(venueObject, nil)

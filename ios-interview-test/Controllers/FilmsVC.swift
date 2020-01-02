@@ -13,16 +13,13 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, Ta
     var cellId = "filmCell"
     var tableView = UITableView()
     private let filmCategory: FilmCategory
-    var errorPresenter: ErrorPresenter!
-    let filmPresenter: FilmPresenter!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let pendingOperations = PendingOperations()
     
     // MARK: - Initializers
     
-    init? (category: FilmCategory, presenter: FilmPresenter, errorPresenter: ErrorPresenter) {
+    init? (category: FilmCategory) {
         self.filmCategory = category
-        self.filmPresenter = presenter
-        self.errorPresenter = errorPresenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,18 +34,18 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, Ta
         
         setupUI()
         
-        filmPresenter.getFilms(category: filmCategory.uid) { (success, error) in
+        appDelegate.filmPresenter.getFilms(category: filmCategory.uid) { (success, error) in
             if success {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             } else {
                 if let error = error {
-                    self.errorPresenter.message = error.localizedDescription
+                    self.appDelegate.errorPresenter.message = error.localizedDescription
                 } else {
-                    self.errorPresenter.message = "Unknown error getting the films"
+                    self.appDelegate.errorPresenter.message = "Unknown error getting the films"
                 }
-                self.errorPresenter.present(in: self)
+                self.appDelegate.errorPresenter.present(in: self)
             }
         }
     }

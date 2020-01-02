@@ -6,20 +6,16 @@
 import UIKit
 
 class FilmCategoriesVC : UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewSetup, ViewControllerSetup {
-    var tableView = UITableView()
-    
     
     // MARK: - Properties
     
     var cellId = "categoryCell"
-    let categoryPresenter: CategoryPresenter!
-    var errorPresenter: ErrorPresenter!
+    var tableView = UITableView()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     // MARK: - Initializers
     
-    init(with presenter: CategoryPresenter, errorPresenter: ErrorPresenter) {
-        self.categoryPresenter = presenter
-        self.errorPresenter = errorPresenter
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     

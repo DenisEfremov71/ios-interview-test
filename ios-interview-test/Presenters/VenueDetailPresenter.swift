@@ -10,9 +10,9 @@ import Foundation
 
 class VenueDetailPresenter {
     
-    let venue: Venue
+    var venue: Venue?
     
-    init(venue: Venue) {
+    init(venue: Venue? = nil) {
         self.venue = venue
     }
     

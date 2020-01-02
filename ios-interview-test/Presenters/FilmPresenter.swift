@@ -7,13 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
-class FilmPresenter {
-    
+class FilmPresenter: ImageCaching {
+
     var films = [Film]()
+    var filmCache = NSCache<NSString, UIImage>()
     
     func getFilms(category: Int, completion: @escaping (Bool, Error?) -> Void) {
-        
+                
         Film.getFilms(category: category) { (result) in
             switch result {
             case .success(let filmObjects):

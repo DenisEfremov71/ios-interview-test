@@ -9,6 +9,7 @@ import UIKit
 // This enum contains all the possible states a film thumbnail image can be in
 enum FilmImageState {
     case new
+    case cached
     case downloaded
     case failed
 }

@@ -12,7 +12,7 @@ import UIKit
 extension FilmsVC {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filmPresenter.films.count
+        return appDelegate.filmPresenter.films.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -24,11 +24,17 @@ extension FilmsVC {
         }
         let indicator = cell.accessoryView as! UIActivityIndicatorView
         
-        let film = filmPresenter.films[indexPath.row]
+        var film = appDelegate.filmPresenter.films[indexPath.row]
         cell.update(film: film)
         cell.textLabel?.text = film.name
         cell.imageView?.image = film.image
         cell.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        // check if the film's image has already been downloaded and stored in the image cache:
+        if let cachedFilmImage = appDelegate.filmPresenter.getFilmImageFromCache(for: film.thumbnailUrl.absoluteString as NSString) {
+            cell.imageView?.image = cachedFilmImage
+            film.state = .cached
+        }
         
         switch (film.state) {
         
@@ -38,9 +44,9 @@ extension FilmsVC {
         case .new:
             indicator.startAnimating()
             if !tableView.isDragging && !tableView.isDecelerating {
-                startOperations(for: film, at: indexPath)
+                startDownload(for: film, at: indexPath)
             }
-        case .downloaded:
+        case .cached, .downloaded:
             indicator.stopAnimating()
         }
         
@@ -48,17 +54,6 @@ extension FilmsVC {
     }
     
     // MARK: - operation management
-    
-    func startOperations(for film: Film, at indexPath: IndexPath) {
-        switch (film.state) {
-        case .new:
-            startDownload(for: film, at: indexPath)
-        case .downloaded:
-            NSLog("Film has been downloaded")
-        case .failed:
-            NSLog("Film failed to download")
-        }
-    }
     
     func startDownload(for film: Film, at indexPath: IndexPath) {
         
@@ -72,8 +67,9 @@ extension FilmsVC {
                 return
             }
             
-            self.filmPresenter.films[indexPath.row].image = downloader.film.image
-            self.filmPresenter.films[indexPath.row].state = FilmImageState.downloaded
+            self.appDelegate.filmPresenter.films[indexPath.row].image = downloader.film.image
+            self.appDelegate.filmPresenter.films[indexPath.row].state = FilmImageState.downloaded
+            self.appDelegate.filmPresenter.storeImageInCache(for: downloader.film)
             
             DispatchQueue.main.async {
                 self.pendingOperations.downloadsInProgress.removeValue(forKey: indexPath)

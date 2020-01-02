@@ -12,13 +12,13 @@ import UIKit
 extension FilmCategoriesVC {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryPresenter.categories.count
+        return appDelegate.categoryPresenter.categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         
-        cell.textLabel?.text = categoryPresenter.categories[indexPath.row].category.rawValue
+        cell.textLabel?.text = appDelegate.categoryPresenter.categories[indexPath.row].category.rawValue
         
         return cell
     }

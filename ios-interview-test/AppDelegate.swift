@@ -10,14 +10,17 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var categoryPresenter = CategoryPresenter()
+    var errorPresenter = ErrorPresenter(message:"")
+    var filmPresenter = FilmPresenter()
+    var filmDetailPresenter = FilmDetailPresenter()
+    var venueDetailPresenter = VenueDetailPresenter()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let navController = UINavigationController()
-        let presenter = CategoryPresenter()
-        navController.viewControllers = [FilmCategoriesVC(with: presenter, errorPresenter: ErrorPresenter(message:""))]
+        navController.viewControllers = [FilmCategoriesVC()]
         window!.rootViewController = navController
         window!.makeKeyAndVisible()
         

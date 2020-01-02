@@ -9,16 +9,13 @@ class FilmDetailVC : UIViewController, ViewControllerSetup {
     
     // MARK: - Properties
     
-    let filmDetailPresenter: FilmDetailPresenter!
-    var errorPresenter: ErrorPresenter!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private let imageView: UIImageView = UIImageView()
     private var venue: Venue? = nil
     
     // MARK: - Initializers
     
-    init? (filmDetailPresenter: FilmDetailPresenter, errorPresenter: ErrorPresenter) {
-        self.filmDetailPresenter = filmDetailPresenter
-        self.errorPresenter = errorPresenter
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -32,23 +29,23 @@ class FilmDetailVC : UIViewController, ViewControllerSetup {
         super.viewDidLoad()
         setupUI()
         
-        self.filmDetailPresenter.fetchImage { (image, error) in
+        appDelegate.filmDetailPresenter.fetchImage { (image, error) in
             if image != nil {
                 DispatchQueue.main.async {
                     self.imageView.image = image
                 }
             } else {
-                self.errorPresenter.message = error?.localizedDescription ?? "no error"
-                self.errorPresenter.present(in: self)
+                self.appDelegate.errorPresenter.message = error?.localizedDescription ?? "no error"
+                self.appDelegate.errorPresenter.present(in: self)
             }
         }
         
-        self.filmDetailPresenter.fetchVenue { (venue, error) in
+        appDelegate.filmDetailPresenter.fetchVenue { (venue, error) in
             if venue != nil {
                 self.venue = venue
             } else {
-                self.errorPresenter.message = error?.localizedDescription ?? "no error"
-                self.errorPresenter.present(in: self)
+                self.appDelegate.errorPresenter.message = error?.localizedDescription ?? "no error"
+                self.appDelegate.errorPresenter.present(in: self)
             }
         }
     }
@@ -57,7 +54,7 @@ class FilmDetailVC : UIViewController, ViewControllerSetup {
     
     func setupUI() {
         
-        title = filmDetailPresenter.film.name
+        title = appDelegate.filmDetailPresenter.film!.name
         self.view.backgroundColor = .white
         
         let displayWidth: CGFloat = view.frame.width
@@ -83,15 +80,12 @@ class FilmDetailVC : UIViewController, ViewControllerSetup {
     
     @objc func onVenueButton(sender: UIButton!) {
         guard self.venue != nil else {
-            errorPresenter.message = "No venue associated with the movie"
-            errorPresenter.present(in: self)
+            appDelegate.errorPresenter.message = "No venue associated with the movie"
+            appDelegate.errorPresenter.present(in: self)
             return
         }
-        guard let venueDetailVC = VenueDetailVC(venueDetailPresenter: VenueDetailPresenter(venue: venue!), errorPresenter: errorPresenter) else {
-            errorPresenter.message = "Failed to initialize VenueDetailVC"
-            errorPresenter.present(in: self)
-            return
-        }
+        appDelegate.venueDetailPresenter.venue = self.venue
+        let venueDetailVC = VenueDetailVC()
         self.navigationController?.pushViewController(venueDetailVC, animated: true)
     }
 

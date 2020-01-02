@@ -58,8 +58,8 @@ extension FilmsVC {
             }
             
             for indexPath in toBeStarted {
-                let filmToProcess = filmPresenter.films[indexPath.row]
-                startOperations(for: filmToProcess, at: indexPath)
+                let filmToProcess = appDelegate.filmPresenter.films[indexPath.row]
+                startDownload(for: filmToProcess, at: indexPath)
             }
         }
     }

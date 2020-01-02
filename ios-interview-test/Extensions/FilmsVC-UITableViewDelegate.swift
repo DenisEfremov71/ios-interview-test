@@ -16,10 +16,8 @@ extension FilmsVC {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let filmDetailVC = FilmDetailVC(filmDetailPresenter: FilmDetailPresenter(film: filmPresenter.films[indexPath.row]), errorPresenter: errorPresenter) else {
-            return
-        }
-        
+        let filmDetailVC = FilmDetailVC()
+        appDelegate.filmDetailPresenter.film = appDelegate.filmPresenter.films[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(filmDetailVC, animated: true)
     }

@@ -19,10 +19,10 @@
 		2711C8B72087BFE900FD6675 /* ios_interview_testTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C8B62087BFE900FD6675 /* ios_interview_testTests.swift */; };
 		27BF2BE420BF77B00099D59D /* FilmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF2BE320BF77B00099D59D /* FilmCell.swift */; };
 		7247A5DA23B839E900CCAE30 /* FilmOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7247A5D923B839E900CCAE30 /* FilmOperations.swift */; };
+		7B30825523BE94F7006815BA /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B30825423BE94F7006815BA /* Caching.swift */; };
 		7B3D16E823BA7361001C3C13 /* UISetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3D16E723BA7361001C3C13 /* UISetup.swift */; };
 		7BA5CDD923BA441C00AEB8D7 /* VenueDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA5CDD823BA441C00AEB8D7 /* VenueDetailVC.swift */; };
 		7BA5CDDB23BA44E200AEB8D7 /* VenueDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA5CDDA23BA44E200AEB8D7 /* VenueDetailPresenter.swift */; };
-		7BA5CDDD23BA4ADE00AEB8D7 /* TableViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA5CDDC23BA4ADE00AEB8D7 /* TableViewSetup.swift */; };
 		7BE21A7D23B8E64B00E671E4 /* FilmsVC-UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE21A7C23B8E64B00E671E4 /* FilmsVC-UIScrollViewDelegate.swift */; };
 		7BE21A7F23B90B3D00E671E4 /* UIPesenters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE21A7E23B90B3D00E671E4 /* UIPesenters.swift */; };
 		7BEEBCFA23B7BAC200CDC905 /* FilmCategoriesVC-UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEBCF923B7BAC200CDC905 /* FilmCategoriesVC-UITableViewDataSource.swift */; };
@@ -61,10 +61,10 @@
 		2711C8B82087BFE900FD6675 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27BF2BE320BF77B00099D59D /* FilmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCell.swift; sourceTree = "<group>"; };
 		7247A5D923B839E900CCAE30 /* FilmOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmOperations.swift; sourceTree = "<group>"; };
+		7B30825423BE94F7006815BA /* Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
 		7B3D16E723BA7361001C3C13 /* UISetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISetup.swift; sourceTree = "<group>"; };
 		7BA5CDD823BA441C00AEB8D7 /* VenueDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailVC.swift; sourceTree = "<group>"; };
 		7BA5CDDA23BA44E200AEB8D7 /* VenueDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailPresenter.swift; sourceTree = "<group>"; };
-		7BA5CDDC23BA4ADE00AEB8D7 /* TableViewSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSetup.swift; sourceTree = "<group>"; };
 		7BE21A7C23B8E64B00E671E4 /* FilmsVC-UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilmsVC-UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
 		7BE21A7E23B90B3D00E671E4 /* UIPesenters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPesenters.swift; sourceTree = "<group>"; };
 		7BEEBCF923B7BAC200CDC905 /* FilmCategoriesVC-UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilmCategoriesVC-UITableViewDataSource.swift"; sourceTree = "<group>"; };
@@ -179,6 +179,7 @@
 		7B3D16E623BA7343001C3C13 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				7B30825423BE94F7006815BA /* Caching.swift */,
 				7B3D16E723BA7361001C3C13 /* UISetup.swift */,
 			);
 			path = Protocols;
@@ -192,7 +193,6 @@
 				7BEEBD0223B7C45400CDC905 /* FilmsVC-UITableViewDataSource.swift */,
 				7BEEBD0423B7C46200CDC905 /* FilmsVC-UITableViewDelegate.swift */,
 				7BE21A7C23B8E64B00E671E4 /* FilmsVC-UIScrollViewDelegate.swift */,
-				7BA5CDDC23BA4ADE00AEB8D7 /* TableViewSetup.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -312,9 +312,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				270335F120B494410017F5A5 /* FilmCategoriesVC.swift in Sources */,
-				7BA5CDDD23BA4ADE00AEB8D7 /* TableViewSetup.swift in Sources */,
 				7BE21A7F23B90B3D00E671E4 /* UIPesenters.swift in Sources */,
 				7BA5CDDB23BA44E200AEB8D7 /* VenueDetailPresenter.swift in Sources */,
+				7B30825523BE94F7006815BA /* Caching.swift in Sources */,
 				27BF2BE420BF77B00099D59D /* FilmCell.swift in Sources */,
 				7BEEBD0123B7C29000CDC905 /* FilmPresenter.swift in Sources */,
 				7BE21A7D23B8E64B00E671E4 /* FilmsVC-UIScrollViewDelegate.swift in Sources */,
