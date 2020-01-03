@@ -59,7 +59,9 @@ extension FilmsVC {
             
             for indexPath in toBeStarted {
                 let filmToProcess = appDelegate.filmPresenter.films[indexPath.row]
-                startDownload(for: filmToProcess, at: indexPath)
+                if filmToProcess.state != .downloaded {
+                    startDownload(for: filmToProcess, at: indexPath)
+                }
             }
         }
     }

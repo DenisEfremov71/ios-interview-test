@@ -10,12 +10,20 @@ import UIKit
 
 protocol ViewControllerSetup {
     func setupUI()
+    func addViews()
+    func layoutViews()
+}
+
+extension ViewControllerSetup {
+    func addViews() {}
+    func layoutViews() {}
 }
 
 protocol TableViewSetup {
     var cellId: String { get set }
     var tableView: UITableView { get set }
     func setupTableView()
+    func applyConstraints()
 }
 
 extension TableViewSetup where Self: UIViewController, Self: UITableViewDataSource, Self: UITableViewDelegate {
@@ -36,6 +44,22 @@ extension TableViewSetup where Self: UIViewController, Self: UITableViewDataSour
         tableView.dataSource = self
         tableView.delegate = self
         self.view.addSubview(tableView)
+    }
+    
+    func applyConstraints() {
+        var constraints = [NSLayoutConstraint]()
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        // tableView.top = view.top
+        constraints += [NSLayoutConstraint.init(item: tableView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1.0, constant: 0.0)]
+        // tableView.leading = view.leading
+        constraints += [NSLayoutConstraint.init(item: tableView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1.0, constant: 0.0)]
+        // tableView.trailing = view.trailing
+        constraints += [NSLayoutConstraint.init(item: tableView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: 0.0)]
+        // tableView.bottom = view.bottom
+        constraints += [NSLayoutConstraint.init(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0.0)]
+        
+        self.view.addConstraints(constraints)
     }
     
 }

@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import MapKit
 
-class VenueDetailVC: UIViewController, ViewControllerSetup {
+class VenueDetailVC: UIViewController {
+    
+    // MARK: - Subviews
+    
+    var venueAddress = UILabel()
+    var mapView = MKMapView()
     
     // MARK: - Properties
     
@@ -29,26 +35,6 @@ class VenueDetailVC: UIViewController, ViewControllerSetup {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-    }
-    
-    // MARK: - ViewControllerSetup protocol
-    
-    func setupUI() {
-        title = "Venue: \(appDelegate.venueDetailPresenter.venue!.name)"
-        view.backgroundColor = .white
-        
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        navigationItem.backBarButtonItem = backItem
-        
-        let venueAddress = UILabel(frame: CGRect(x: 20, y: 20, width: 280, height: 100))
-        venueAddress.center = CGPoint(x: 160, y: 100)
-        venueAddress.textAlignment = .left
-        venueAddress.text = "Address: \(appDelegate.venueDetailPresenter.venue!.address)"
-        venueAddress.numberOfLines = 2
-        venueAddress.lineBreakMode = .byWordWrapping
-        self.view.addSubview(venueAddress)
-        
     }
 
 }

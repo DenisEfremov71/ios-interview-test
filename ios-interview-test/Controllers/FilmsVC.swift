@@ -60,6 +60,7 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, Ta
         navigationItem.backBarButtonItem = backItem
         
         setupTableView()
+        applyConstraints()
     }
     
 }

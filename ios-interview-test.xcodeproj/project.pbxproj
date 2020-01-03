@@ -19,6 +19,8 @@
 		2711C8B72087BFE900FD6675 /* ios_interview_testTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C8B62087BFE900FD6675 /* ios_interview_testTests.swift */; };
 		27BF2BE420BF77B00099D59D /* FilmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF2BE320BF77B00099D59D /* FilmCell.swift */; };
 		7247A5DA23B839E900CCAE30 /* FilmOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7247A5D923B839E900CCAE30 /* FilmOperations.swift */; };
+		729290A723BF860B00AF14D7 /* FilmDetailVC-ViewControllerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729290A623BF860B00AF14D7 /* FilmDetailVC-ViewControllerSetup.swift */; };
+		72A93BE023BEFB5100EFD857 /* VenueDetailVC-ViewControllerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A93BDF23BEFB5100EFD857 /* VenueDetailVC-ViewControllerSetup.swift */; };
 		7B30825523BE94F7006815BA /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B30825423BE94F7006815BA /* Caching.swift */; };
 		7B3D16E823BA7361001C3C13 /* UISetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3D16E723BA7361001C3C13 /* UISetup.swift */; };
 		7BA5CDD923BA441C00AEB8D7 /* VenueDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA5CDD823BA441C00AEB8D7 /* VenueDetailVC.swift */; };
@@ -61,6 +63,8 @@
 		2711C8B82087BFE900FD6675 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27BF2BE320BF77B00099D59D /* FilmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCell.swift; sourceTree = "<group>"; };
 		7247A5D923B839E900CCAE30 /* FilmOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmOperations.swift; sourceTree = "<group>"; };
+		729290A623BF860B00AF14D7 /* FilmDetailVC-ViewControllerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilmDetailVC-ViewControllerSetup.swift"; sourceTree = "<group>"; };
+		72A93BDF23BEFB5100EFD857 /* VenueDetailVC-ViewControllerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VenueDetailVC-ViewControllerSetup.swift"; sourceTree = "<group>"; };
 		7B30825423BE94F7006815BA /* Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
 		7B3D16E723BA7361001C3C13 /* UISetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISetup.swift; sourceTree = "<group>"; };
 		7BA5CDD823BA441C00AEB8D7 /* VenueDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailVC.swift; sourceTree = "<group>"; };
@@ -190,9 +194,11 @@
 			children = (
 				7BEEBCF923B7BAC200CDC905 /* FilmCategoriesVC-UITableViewDataSource.swift */,
 				7BEEBCFE23B7BE5700CDC905 /* FilmCategoriesVC-UITableViewDelegate.swift */,
+				729290A623BF860B00AF14D7 /* FilmDetailVC-ViewControllerSetup.swift */,
+				7BE21A7C23B8E64B00E671E4 /* FilmsVC-UIScrollViewDelegate.swift */,
 				7BEEBD0223B7C45400CDC905 /* FilmsVC-UITableViewDataSource.swift */,
 				7BEEBD0423B7C46200CDC905 /* FilmsVC-UITableViewDelegate.swift */,
-				7BE21A7C23B8E64B00E671E4 /* FilmsVC-UIScrollViewDelegate.swift */,
+				72A93BDF23BEFB5100EFD857 /* VenueDetailVC-ViewControllerSetup.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -321,6 +327,7 @@
 				7BEEBCFA23B7BAC200CDC905 /* FilmCategoriesVC-UITableViewDataSource.swift in Sources */,
 				2711C8A42087BFE800FD6675 /* FilmsVC.swift in Sources */,
 				7BEEBD0723B7DF2E00CDC905 /* FilmDetailPresenter.swift in Sources */,
+				729290A723BF860B00AF14D7 /* FilmDetailVC-ViewControllerSetup.swift in Sources */,
 				270335EF20B494160017F5A5 /* FilmCategory.swift in Sources */,
 				270335ED20B4932A0017F5A5 /* Venue.swift in Sources */,
 				7BEEBCFD23B7BBC100CDC905 /* CategoryPresenter.swift in Sources */,
@@ -331,6 +338,7 @@
 				270335EB20B493220017F5A5 /* Film.swift in Sources */,
 				2711C8A22087BFE800FD6675 /* AppDelegate.swift in Sources */,
 				7B3D16E823BA7361001C3C13 /* UISetup.swift in Sources */,
+				72A93BE023BEFB5100EFD857 /* VenueDetailVC-ViewControllerSetup.swift in Sources */,
 				7BEEBCFF23B7BE5700CDC905 /* FilmCategoriesVC-UITableViewDelegate.swift in Sources */,
 				270335F320B4944C0017F5A5 /* FilmDetailVC.swift in Sources */,
 			);
