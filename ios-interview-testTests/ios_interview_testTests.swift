@@ -17,7 +17,7 @@ final class ios_interview_testTests: XCTestCase {
         super.setUp()
         
         filmCategory = FilmCategory(uid: 1)
-        film = Film(uid: 1, name: "Test", shortDesc: "Test", duration: 105, thumbnailUrl: URL.init(string: "https://testUrl.com")!, categoryId: 1, venueId: 1)
+        film = Film(uid: 1, name: "Test", shortDesc: "Test", duration: 105, thumbnailUrl: URL.init(string: "https://testUrl.com")!, categoryId: [1], venueId: 1, state: FilmImageState.new, image: UIImage(named: "Placeholder"))
         venue = Venue(uid: 1, name: "Test", address: "1234 Test St, San Francisco, 90201")
     }
     
@@ -28,11 +28,11 @@ final class ios_interview_testTests: XCTestCase {
         venue = nil
     }
     
-    func categoryTest() {
-        XCTAssertEqual(film.categoryId, filmCategory.uid)
+    func test_categoryTest() {
+        XCTAssertTrue(film.categoryId.contains(filmCategory.uid))
     }
     
-    func venueTest() {
+    func test_venueTest() {
         XCTAssertEqual(film.venueId, venue.uid)
     }
 }

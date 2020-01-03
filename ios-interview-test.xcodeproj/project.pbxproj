@@ -23,6 +23,7 @@
 		72A93BE023BEFB5100EFD857 /* VenueDetailVC-ViewControllerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A93BDF23BEFB5100EFD857 /* VenueDetailVC-ViewControllerSetup.swift */; };
 		7B30825523BE94F7006815BA /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B30825423BE94F7006815BA /* Caching.swift */; };
 		7B3D16E823BA7361001C3C13 /* UISetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3D16E723BA7361001C3C13 /* UISetup.swift */; };
+		7B9B18A123BFE59D00231138 /* FilmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B18A023BFE59D00231138 /* FilmTests.swift */; };
 		7BA5CDD923BA441C00AEB8D7 /* VenueDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA5CDD823BA441C00AEB8D7 /* VenueDetailVC.swift */; };
 		7BA5CDDB23BA44E200AEB8D7 /* VenueDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA5CDDA23BA44E200AEB8D7 /* VenueDetailPresenter.swift */; };
 		7BE21A7D23B8E64B00E671E4 /* FilmsVC-UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE21A7C23B8E64B00E671E4 /* FilmsVC-UIScrollViewDelegate.swift */; };
@@ -67,6 +68,7 @@
 		72A93BDF23BEFB5100EFD857 /* VenueDetailVC-ViewControllerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VenueDetailVC-ViewControllerSetup.swift"; sourceTree = "<group>"; };
 		7B30825423BE94F7006815BA /* Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
 		7B3D16E723BA7361001C3C13 /* UISetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISetup.swift; sourceTree = "<group>"; };
+		7B9B18A023BFE59D00231138 /* FilmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmTests.swift; sourceTree = "<group>"; };
 		7BA5CDD823BA441C00AEB8D7 /* VenueDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailVC.swift; sourceTree = "<group>"; };
 		7BA5CDDA23BA44E200AEB8D7 /* VenueDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailPresenter.swift; sourceTree = "<group>"; };
 		7BE21A7C23B8E64B00E671E4 /* FilmsVC-UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilmsVC-UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		2711C8B52087BFE900FD6675 /* ios-interview-testTests */ = {
 			isa = PBXGroup;
 			children = (
+				7B9B189F23BFE57E00231138 /* Models */,
 				2711C8B62087BFE900FD6675 /* ios_interview_testTests.swift */,
 				2711C8B82087BFE900FD6675 /* Info.plist */,
 			);
@@ -187,6 +190,14 @@
 				7B3D16E723BA7361001C3C13 /* UISetup.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7B9B189F23BFE57E00231138 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7B9B18A023BFE59D00231138 /* FilmTests.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		7BEEBCF823B7B96700CDC905 /* Extensions */ = {
@@ -349,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2711C8B72087BFE900FD6675 /* ios_interview_testTests.swift in Sources */,
+				7B9B18A123BFE59D00231138 /* FilmTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
