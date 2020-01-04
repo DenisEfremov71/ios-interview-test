@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct FilmCategory {
+struct FilmCategory: Equatable {
     enum Category: String {
         case Action
         case Comedy
@@ -35,5 +35,9 @@ struct FilmCategory {
         let comedy = FilmCategory.init(uid: 2)
         let drama = FilmCategory.init(uid: 3)
         return [action, comedy, drama]
+    }
+    
+    static func ==(lhs: FilmCategory, rhs: FilmCategory) -> Bool {
+        return lhs.uid == rhs.uid && lhs.category == rhs.category
     }
 }
