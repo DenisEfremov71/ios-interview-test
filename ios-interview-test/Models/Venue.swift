@@ -19,6 +19,8 @@ struct Venue {
     
     static func getVenue(uid: Int, completion: ((Result<Venue>) -> Void)?) {
         guard let url:URL = URL.init(string: venueUrlString) else {
+            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not create URL from venueUrlString"]) as Error
+            completion?(.failure(error))
             return
         }
         
