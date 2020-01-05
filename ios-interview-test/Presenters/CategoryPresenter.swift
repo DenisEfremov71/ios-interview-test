@@ -10,6 +10,6 @@ import Foundation
 
 class CategoryPresenter {
     
-    let categories = FilmCategory.allCategories()
+    var categories = FilmCategory.allCategories()
     
 }

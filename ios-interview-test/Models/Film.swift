@@ -14,7 +14,7 @@ enum FilmImageState {
     case failed
 }
 
-struct Film {
+struct Film: Equatable {
     static private let movieUrlString: String = "https://assets.eventbase.com/apps/ios-interview-project/resources/movielistjson.json"
     
     let uid: Int
@@ -65,6 +65,19 @@ struct Film {
         }
         
         task.resume()
+    }
+    
+    static func ==(lhs: Film, rhs: Film) -> Bool {
+        return
+            lhs.uid == rhs.uid &&
+            lhs.name == rhs.name &&
+            lhs.shortDesc == rhs.shortDesc &&
+            lhs.duration == rhs.duration &&
+            lhs.thumbnailUrl == rhs.thumbnailUrl &&
+            lhs.categoryId == rhs.categoryId &&
+            lhs.venueId == rhs.venueId &&
+            lhs.state == rhs.state &&
+            lhs.image == rhs.image
     }
 }
 

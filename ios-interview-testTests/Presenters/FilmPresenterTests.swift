@@ -23,8 +23,21 @@ class FilmPresenterTests: XCTestCase {
         super.tearDown()
     }
     
+    // MARK: - Initialization
+    
     func testInit_WhenInitialized_ShouldNotBeNil() {
         XCTAssertNotNil(sut)
     }
+    
+    func testInit_WhenInitialized_FilmCacheShouldNotBeNil() {
+        XCTAssertNotNil(sut.filmCache)
+    }
+    
+    func testInit_WhenInitialized_FilmArrayShouldBeEmpty() {
+        XCTAssertNotNil(sut.films)
+        XCTAssertTrue(sut.films.count == 0)
+    }
+    
+    
 
 }

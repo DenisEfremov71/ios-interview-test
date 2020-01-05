@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct Venue {
+struct Venue: Equatable {
     static private let venueUrlString: String = "https://assets.eventbase.com/apps/ios-interview-project/resources/venuelistjson.json"
     
     let uid: Int
@@ -53,6 +53,10 @@ struct Venue {
         }
         
         task.resume()
+    }
+    
+    static func ==(lhs: Venue, rhs: Venue) -> Bool {
+        return lhs.uid == rhs.uid && lhs.name == rhs.name && lhs.address == rhs.address
     }
 }
 

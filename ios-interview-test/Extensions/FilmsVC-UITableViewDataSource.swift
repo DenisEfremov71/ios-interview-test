@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension FilmsVC {
+extension FilmsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appDelegate.filmPresenter.films.count

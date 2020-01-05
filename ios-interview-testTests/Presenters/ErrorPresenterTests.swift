@@ -23,8 +23,14 @@ class ErrorPresenterTests: XCTestCase {
         super.tearDown()
     }
     
+    // MARK: - Initialization
+    
     func testInit_WhenInitialized_ShouldNotBeNil() {
         XCTAssertNotNil(sut)
     }
 
+    func testInit_WhenInitialized_MessageShouldBeSet() {
+        XCTAssertEqual(sut.message, "Test")
+    }
+    
 }

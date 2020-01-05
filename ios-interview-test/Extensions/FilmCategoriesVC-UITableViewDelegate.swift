@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension FilmCategoriesVC {
+extension FilmCategoriesVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50

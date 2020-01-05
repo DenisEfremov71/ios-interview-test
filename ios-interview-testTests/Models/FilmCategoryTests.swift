@@ -12,6 +12,7 @@ import XCTest
 class FilmCategoryTests: XCTestCase {
     
     var sut: FilmCategory!
+    let arrayOfAllCategories = [FilmCategory(uid: 1), FilmCategory(uid: 2), FilmCategory(uid: 3)]
 
     override func setUp() {
         super.setUp()
@@ -22,6 +23,8 @@ class FilmCategoryTests: XCTestCase {
         sut = nil
         super.tearDown()
     }
+    
+    // MARK: - Initialization
 
     func testInit_WhenInitialized_ShouldNotBeNil() {
         XCTAssertNotNil(sut)
@@ -50,8 +53,9 @@ class FilmCategoryTests: XCTestCase {
         XCTAssertEqual(filmCategory.category, FilmCategory.Category.Other)
     }
     
+    // MARK: - Categories
+    
     func testAllCategories_ShouldReturnArrayOfAllCategories() {
-        let arrayOfAllCategories = [FilmCategory(uid: 1), FilmCategory(uid: 2), FilmCategory(uid: 3)]
         XCTAssertEqual(FilmCategory.allCategories(), arrayOfAllCategories)
     }
     

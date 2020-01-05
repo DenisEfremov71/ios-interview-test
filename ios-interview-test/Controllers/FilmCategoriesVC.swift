@@ -5,7 +5,7 @@
 
 import UIKit
 
-class FilmCategoriesVC : UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewSetup, ViewControllerSetup {
+class FilmCategoriesVC : UIViewController, TableViewSetup, ViewControllerSetup {
     
     // MARK: - Properties
     

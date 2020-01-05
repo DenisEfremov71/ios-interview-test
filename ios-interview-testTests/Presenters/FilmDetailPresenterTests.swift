@@ -12,10 +12,11 @@ import XCTest
 class FilmDetailPresenterTests: XCTestCase {
     
     var sut: FilmDetailPresenter!
+    let avengersMovie = Film(uid: 1, name: "Avengers: Infinity War", shortDesc: "Lorem Ipsum", duration: 120, thumbnailUrl: URL(string: "https://s3.amazonaws.com/mobile.scribd.com/ios-interview-test/avg.jpg")!, categoryId: [1], venueId: 1, state: FilmImageState.new, image: UIImage(named: "Placeholder"))
 
     override func setUp() {
         super.setUp()
-        sut = FilmDetailPresenter()
+        sut = FilmDetailPresenter(film: avengersMovie)
     }
 
     override func tearDown() {
@@ -23,8 +24,19 @@ class FilmDetailPresenterTests: XCTestCase {
         super.tearDown()
     }
 
+    // MARK: - Initialization
+    
     func testInit_WhenInitialized_ShouldNotBeNil() {
         XCTAssertNotNil(sut)
     }
+    
+    func testInit_WhenInitialized_ImageCacheShouldNotBeNil() {
+        XCTAssertNotNil(sut.filmCache)
+    }
 
+    func testInit_WhenInitializedWithFilm_FilmShouldBeSet() {
+        XCTAssertEqual(sut.film, avengersMovie)
+    }
+    
+    
 }

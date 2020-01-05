@@ -6,7 +6,7 @@
 
 import UIKit
 
-class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewSetup, ViewControllerSetup {
+class FilmsVC: UIViewController, TableViewSetup, ViewControllerSetup {
 
     // MARK: - Properties
     
@@ -15,6 +15,9 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, Ta
     private let filmCategory: FilmCategory
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let pendingOperations = PendingOperations()
+    var currentFilmCategory: FilmCategory {
+        return filmCategory
+    }
     
     // MARK: - Initializers
     
@@ -31,7 +34,6 @@ class FilmsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, Ta
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         
         appDelegate.filmPresenter.getFilms(category: filmCategory.uid) { (success, error) in

@@ -23,6 +23,8 @@ class CategoryPresenterTests: XCTestCase {
         super.tearDown()
     }
 
+    // MARK: - Initialization
+    
     func testInit_WhenInitialized_ShouldNotBeNil() {
         XCTAssertNotNil(sut)
     }

@@ -15,7 +15,7 @@ class FilmTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = Film(uid: 1, name: "Avengers: Infinity War", shortDesc: "Lorem Ipsum", duration: 120, thumbnailUrl: URL(string: "https://assets.eventbase.com/apps/ios-interview-project/images/avg.jpg")!, categoryId: [1], venueId: 1, state: FilmImageState.new, image: UIImage(named: "Placeholder"))
+        sut = Film(uid: 1, name: "Avengers: Infinity War", shortDesc: "Lorem Ipsum", duration: 120, thumbnailUrl: URL(string: "https://s3.amazonaws.com/mobile.scribd.com/ios-interview-test/avg.jpg")!, categoryId: [1], venueId: 1, state: FilmImageState.new, image: UIImage(named: "Placeholder"))
     }
 
     override func tearDown() {
@@ -32,7 +32,7 @@ class FilmTests: XCTestCase {
         XCTAssertEqual(sut.name, "Avengers: Infinity War")
         XCTAssertEqual(sut.shortDesc, "Lorem Ipsum")
         XCTAssertEqual(sut.duration, 120)
-        XCTAssertEqual(sut.thumbnailUrl, URL(string: "https://assets.eventbase.com/apps/ios-interview-project/images/avg.jpg")!)
+        XCTAssertEqual(sut.thumbnailUrl, URL(string: "https://s3.amazonaws.com/mobile.scribd.com/ios-interview-test/avg.jpg")!)
         XCTAssertEqual(sut.categoryId, [1])
         XCTAssertEqual(sut.venueId, 1)
         XCTAssertEqual(sut.state, FilmImageState.new)

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension FilmsVC {
+extension FilmsVC: UIScrollViewDelegate {
     
     // MARK: - UIScrollViewDelegate
     
