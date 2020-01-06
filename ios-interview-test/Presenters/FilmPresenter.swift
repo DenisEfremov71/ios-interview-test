@@ -12,7 +12,7 @@ import UIKit
 class FilmPresenter: ImageCaching {
 
     var films = [Film]()
-    var filmCache = NSCache<NSString, UIImage>()
+    var filmCache = NSCache<NSString, FilmImage>()
     
     func getFilms(category: Int, completion: @escaping (Bool, Error?) -> Void) {
         

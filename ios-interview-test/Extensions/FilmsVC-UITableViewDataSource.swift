@@ -32,7 +32,7 @@ extension FilmsVC: UITableViewDataSource {
         
         // check if the film's image has already been downloaded and stored in the image cache:
         if let cachedFilmImage = appDelegate.filmPresenter.getFilmImageFromCache(for: film.thumbnailUrl.absoluteString as NSString) {
-            cell.imageView?.image = cachedFilmImage
+            cell.imageView?.image = cachedFilmImage.image
             film.state = .cached
         }
         

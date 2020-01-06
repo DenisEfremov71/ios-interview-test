@@ -17,7 +17,7 @@ enum FilmDetailPresenterError: Error {
 class FilmDetailPresenter: ImageCaching {
     
     var film: Film?
-    var filmCache = NSCache<NSString, UIImage>()
+    var filmCache = NSCache<NSString, FilmImage>()
     
     init(film: Film? = nil) {
         self.film = film
@@ -29,7 +29,7 @@ class FilmDetailPresenter: ImageCaching {
             var imageData: NSData
             do {
                 if let cachedImage = self.getFilmImageFromCache(for: self.film!.thumbnailUrl.absoluteString as NSString) {
-                    completion(cachedImage, nil)
+                    completion(cachedImage.image, nil)
                 } else {
                     imageData = try NSData(contentsOf: imageUrl)
                     if let image = UIImage(data: imageData as Data) {
