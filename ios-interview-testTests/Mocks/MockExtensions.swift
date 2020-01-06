@@ -143,10 +143,12 @@ extension FilmPresenterTests {
     
     class FilmPresenterMockup: FilmPresenter {
         
+        var resourceName = String()
+        
         override func getFilms(category: Int, completion: @escaping (Bool, Error?) -> Void) {
             
             let testBundle = Bundle(for: type(of: self))
-            guard let fileURL = testBundle.url(forResource: "movielist", withExtension: "json") else {
+            guard let fileURL = testBundle.url(forResource: resourceName, withExtension: "json") else {
                 let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not find movielist.json file."]) as Error
                 completion(false, error)
                 return

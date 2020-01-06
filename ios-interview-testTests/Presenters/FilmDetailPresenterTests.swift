@@ -59,6 +59,6 @@ class FilmDetailPresenterTests: XCTestCase {
         XCTAssertNil(cachedImage)
         sut.storeImageInCache(for: sut.film!)
         cachedImage = sut.getFilmImageFromCache(for: sut.film!.thumbnailUrl.absoluteString as NSString)
-        XCTAssertEqual(sut.film!.image, cachedImage)
+        XCTAssertEqual(sut.film!.image, cachedImage!.image)
     }
 }

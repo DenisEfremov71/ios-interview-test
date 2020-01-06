@@ -17,6 +17,14 @@ class FilmDetailVC : UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private var venue: Venue? = nil
+    var currentVenue: Venue? {
+        get {
+            return venue
+        }
+        set {
+            venue = newValue
+        }
+    }
     
     // MARK: - Initializers
     
