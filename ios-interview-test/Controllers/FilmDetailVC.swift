@@ -11,6 +11,7 @@ class FilmDetailVC : UIViewController {
     
     var imageView = UIImageView()
     var venueButton = UIButton()
+    var spinner = UIActivityIndicatorView()
     
     // MARK: - Properties
     
@@ -41,6 +42,7 @@ class FilmDetailVC : UIViewController {
                     self.imageView.image = image
                     self.imageView.isHidden = false
                     self.venueButton.isHidden = false
+                    self.spinner.stopAnimating()
                 }
             } else {
                 self.appDelegate.errorPresenter.message = error?.localizedDescription ?? "no error"

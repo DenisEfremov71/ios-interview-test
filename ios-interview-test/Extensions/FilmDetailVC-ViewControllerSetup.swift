@@ -26,6 +26,7 @@ extension FilmDetailVC: ViewControllerSetup {
     }
     
     func addViews() {
+        addSpinner()
         addImageView()
         addVenueButton()
     }
@@ -55,7 +56,22 @@ extension FilmDetailVC: ViewControllerSetup {
         // venueButton.bottom <= view.bottom - 10
         constraints += [NSLayoutConstraint.init(item: venueButton, attribute: .bottom, relatedBy: .lessThanOrEqual, toItem: view, attribute: .bottom, multiplier: 1.0, constant: -10.0)]
         
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        // spinner.leading = view.leading
+        constraints += [NSLayoutConstraint.init(item: spinner, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0)]
+        // spinner.trailing = view.trailing
+        constraints += [NSLayoutConstraint.init(item: spinner, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0)]
+        // spinner.centerY = view.centerY
+        constraints += [NSLayoutConstraint.init(item: spinner, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1.0, constant: 0.0)]
+        
         view.addConstraints(constraints)
+    }
+    
+    func addSpinner() {
+        spinner.activityIndicatorViewStyle = .gray
+        spinner.hidesWhenStopped = true
+        spinner.startAnimating()
+        view.addSubview(spinner)
     }
     
     func addImageView() {
