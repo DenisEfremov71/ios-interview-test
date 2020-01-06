@@ -47,14 +47,44 @@ class FilmDetailPresenter: ImageCaching {
     }
     
     func fetchVenue(completion: @escaping (Venue?, Error?) -> Void) {
-        Venue.getVenue(uid: film!.venueId) { (result) in
-            switch result {
-            case .success(let venueObject):
-                completion(venueObject, nil)
-            case .failure(let error):
+        
+        guard let url:URL = URL.init(string: EndPoints.venueUrlString) else {
+            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Failed to create URL from string: \(EndPoints.venueUrlString)"]) as Error
+            completion(nil, error)
+            return
+        }
+        
+        /*
+         Example response:
+         [{ "uid": 1, "name": "AMC Kabuki", "address": "1881 Post St, San Francisco, CA 94115" }]
+         */
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: request) { (responseData, response, responseError) in
+            if let error = responseError {
+                completion(nil, error)
+            } else if let jsonData = responseData {
+                let decoder = JSONDecoder()
+                do {
+                    let venues = try decoder.decode([Venue].self, from: jsonData)
+                    guard let venue = venues.first(where: { $0.uid == self.film!.venueId } ) else {
+                        let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Failed to find the venue for the film \(self.film?.name ?? "no name")"]) as Error
+                        completion(nil, error)
+                        return
+                    }
+                    completion(venue, nil)
+                } catch {
+                    completion(nil, error)
+                }
+            } else {
+                let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Data was not retrieved from request"]) as Error
                 completion(nil, error)
             }
         }
+        
+        task.resume()
     }
     
 }

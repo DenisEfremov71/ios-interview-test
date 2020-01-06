@@ -11,11 +11,12 @@ import XCTest
 
 class FilmPresenterTests: XCTestCase {
 
-    var sut: FilmPresenter!
+    var sut: FilmPresenterMockup!
+    let avengersMovie = Film(uid: 1, name: "Avengers: Infinity War", shortDesc: "Lorem Ipsum", duration: 120, thumbnailUrl: URL(string: "https://s3.amazonaws.com/mobile.scribd.com/ios-interview-test/avg.jpg")!, categoryId: [1], venueId: 1, state: FilmImageState.new, image: UIImage(named: "Placeholder"))
     
     override func setUp() {
         super.setUp()
-        sut = FilmPresenter()
+        sut = FilmPresenterMockup()
     }
     
     override func tearDown() {
@@ -38,6 +39,26 @@ class FilmPresenterTests: XCTestCase {
         XCTAssertTrue(sut.films.count == 0)
     }
     
+    // MARK: - JSON decoding
     
+    func testJSONDecoding_WhenReceivedJSONData_ParsesDataIntoArrayOfFilms() {
+        sut.getFilms(category: 1) { (success, error) in
+            if success {
+                XCTAssertEqual(self.sut.films[0], self.avengersMovie)
+            } else {
+                XCTFail(error!.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: - Image cache
+    
+    func testImageCache_WhenImageIsNotInCache_ItIsStoredInCache() {
+        var cachedImage = sut.getFilmImageFromCache(for: avengersMovie.thumbnailUrl.absoluteString as NSString)
+        XCTAssertNil(cachedImage)
+        sut.storeImageInCache(for: avengersMovie)
+        cachedImage = sut.getFilmImageFromCache(for: avengersMovie.thumbnailUrl.absoluteString as NSString)
+        XCTAssertEqual(avengersMovie.image, cachedImage)
+    }
 
 }
