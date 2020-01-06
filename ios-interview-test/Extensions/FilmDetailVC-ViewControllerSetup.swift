@@ -56,8 +56,6 @@ extension FilmDetailVC: ViewControllerSetup {
         constraints += [NSLayoutConstraint.init(item: venueButton, attribute: .bottom, relatedBy: .lessThanOrEqual, toItem: view, attribute: .bottom, multiplier: 1.0, constant: -10.0)]
         
         view.addConstraints(constraints)
-        imageView.isHidden = false
-        venueButton.isHidden = false
     }
     
     func addImageView() {

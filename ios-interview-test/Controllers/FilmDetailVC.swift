@@ -9,7 +9,7 @@ class FilmDetailVC : UIViewController {
     
     // MARK: - Subviews
     
-    var imageView: UIImageView = UIImageView()
+    var imageView = UIImageView()
     var venueButton = UIButton()
     
     // MARK: - Properties
@@ -39,6 +39,8 @@ class FilmDetailVC : UIViewController {
             if image != nil {
                 DispatchQueue.main.async {
                     self.imageView.image = image
+                    self.imageView.isHidden = false
+                    self.venueButton.isHidden = false
                 }
             } else {
                 self.appDelegate.errorPresenter.message = error?.localizedDescription ?? "no error"
